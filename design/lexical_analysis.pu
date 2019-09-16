@@ -1,0 +1,51 @@
+@startuml
+title Sequence Diagram about Lexical Analysis
+autonumber
+
+boundary Compiler
+database MessageRepository
+
+control LexicalAnalyzer
+entity Token
+entity CodeStream
+
+boundary Evaluator
+
+box UserInterfaceDomain
+    participant Compiler
+    participant MessageRepository
+end box
+
+box LexicalAnalysisDomain
+    participant LexicalAnalyzer
+    participant CodeStream
+    participant Token
+end box
+
+box EvaluationDomain
+    participant Evaluator
+end box
+
+== Lexical Analysis ==
+--> Compiler: Programming Code Reader
+Compiler --> LexicalAnalyzer: Programming Code Reader
+note right: Receive Programming Code Reader
+LexicalAnalyzer --> CodeStream: Programming Code Reader
+LexicalAnalyzer <-- CodeStream: CodeStream
+note right: New CodeStream
+LexicalAnalyzer --> Token: CodeStream
+LexicalAnalyzer <-- Token: Tokens
+group success
+Token --> MessageRepository: Success Lexical Analysis
+end
+note right: Try to Generate Tokens from CodeStream
+critical Failed to Analyze
+Token --> LexicalAnalyzer: LexicalError
+LexicalAnalyzer --> MessageRepository: LexicalError
+end
+Compiler <-- LexicalAnalyzer: Tokens
+Compiler --> Evaluator: Tokens
+
+== Token Evaluation ==
+Evaluator -->
+@enduml
