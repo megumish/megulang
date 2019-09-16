@@ -1,9 +1,8 @@
 name: Rust
 
 on:
-  events:
-  - pull_request:
-      branches: [master]
+- pull_request
+- push
 
 jobs:
   build:
