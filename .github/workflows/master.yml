@@ -3,9 +3,6 @@ name: Rust
 on:
 - pull_request:
     branches: [master]
-- push
-- schedule:
-  - cron: 0 4 * * 0-5
 
 jobs:
   build:
