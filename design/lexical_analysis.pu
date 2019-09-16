@@ -5,25 +5,21 @@ autonumber
 boundary Compiler
 database MessageRepository
 
-control LexicalAnalyzer
+boundary LexicalAnalyzer
 entity Token
 entity CodeStream
+database TokenRepository
 
-boundary Evaluator
-
-box UserInterfaceDomain
+box UserInterfaceContext
     participant Compiler
     participant MessageRepository
 end box
 
-box LexicalAnalysisDomain
+box LexicalAnalysisContext
     participant LexicalAnalyzer
     participant CodeStream
     participant Token
-end box
-
-box EvaluationDomain
-    participant Evaluator
+    participant TokenRepository
 end box
 
 == Lexical Analysis ==
@@ -43,9 +39,6 @@ critical Failed to Analyze
 Token --> LexicalAnalyzer: LexicalError
 LexicalAnalyzer --> MessageRepository: LexicalError
 end
-Compiler <-- LexicalAnalyzer: Tokens
-Compiler --> Evaluator: Tokens
+LexicalAnalyzer --> TokenRepository: Tokens
 
-== Token Evaluation ==
-Evaluator -->
 @enduml

@@ -1,0 +1,42 @@
+@startuml
+title Sequence Diagram about Lexical Analysis
+autonumber
+
+database MessageRepository
+
+boundary Evaluator
+control Preprocessor
+entity Function
+entity ValidFunction
+database ValidFunctionRepository
+
+box UserInterfaceContext
+    participant MessageRepository
+end box
+
+box EvaluationContext
+    participant Evaluator
+    participant Preprocessor
+    participant Function
+    participant ValidFunction
+    participant ValidFunctionRepository
+end box
+
+== Token Evaluation ==
+Evaluator --> Preprocessor: Tokens
+Evaluator <-- Preprocessor: PreprocessedTokens
+group success
+Preprocessor --> MessageRepository: Success Preprocessing
+end
+note right: Preprocess
+critical
+Preprocessor --> MessageRepository: PreprocessError
+end
+Evaluator --> Function: PreprocessedTokens
+Evaluator <-- Function: Functions
+note right: Try to Generate Functions from PreprocessedTokens
+Evaluator --> ValidFunction: Functions
+Evaluator <-- ValidFunction: ValidFunctions
+Evaluator --> ValidFunctionRepository: ValidFunctions
+
+@enduml
