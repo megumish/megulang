@@ -1,5 +1,5 @@
 @startuml
-title Sequence Diagram about Lexical Analysis
+title Sequence Diagram about Token Evaluation
 autonumber
 
 database MessageRepository
