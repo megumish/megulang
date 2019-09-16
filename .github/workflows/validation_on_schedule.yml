@@ -1,7 +1,7 @@
 name: Validation on Schedules
 
 on:
-  schdedule:
+  schedule:
     - cron: 0 4 * * 0-5
 
 jobs:
