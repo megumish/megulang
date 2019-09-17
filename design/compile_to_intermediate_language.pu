@@ -1,0 +1,27 @@
+@startuml
+title Sequence Diagram about Compile to Intermediate Language
+autonumber
+
+database MessageRepository
+
+boundary ILCompiler
+entity ILInstruction
+database ILInstructionRepository
+
+box UserInterfaceContext
+    participant MessageRepository
+end box
+
+box ILCompilationContext
+    participant ILCompiler
+    participant ILInstruction
+    participant ILInstructionRepository
+end box
+
+== Compile to Intermediate Language ==
+--> ILCompiler : ValidFunctions
+ILCompiler --> ILInstruction: ValidFunctions
+ILCompiler <-- ILInstruction: ILInstructions
+ILCompiler --> ILInstructionRepository: ILInstructions
+
+@enduml
