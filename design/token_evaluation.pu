@@ -1,0 +1,31 @@
+@startuml
+title Sequence Diagram about Token Evaluation
+autonumber
+
+boundary Evaluator
+control Preprocessor
+entity Function
+entity ValidFunction
+database ValidFunctionRepository
+
+box EvaluationContext
+    participant Evaluator
+    participant Preprocessor
+    participant Function
+    participant ValidFunction
+    participant ValidFunctionRepository
+end box
+
+== Token Evaluation ==
+Evaluator --> Preprocessor: Tokens
+Evaluator <-- Preprocessor: PreprocessedTokens
+note right: Preprocess
+Evaluator --> Function: PreprocessedTokens
+Evaluator <-- Function: Functions
+note right: Try to Generate Functions from PreprocessedTokens
+Evaluator --> ValidFunction: Functions
+Evaluator <-- ValidFunction: ValidFunctions
+note right: Try to Generate ValidFunctions from Functions
+Evaluator --> ValidFunctionRepository: ValidFunctions
+
+@enduml

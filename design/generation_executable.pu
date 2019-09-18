@@ -1,0 +1,25 @@
+@startuml
+title Sequence Diagram about Generation Executable
+autonumber
+
+boundary ExecutableGenerator
+entity NativeInstruction
+entity Executable
+
+box GenerationExecutableContext
+    participant ExecutableGenerator
+    participant NativeInstruction
+    participant Executable
+end box
+
+== Generation Executable ==
+--> ExecutableGenerator : ILInstructions
+ExecutableGenerator --> NativeInstruction: ILInstructions
+ExecutableGenerator <-- NativeInstruction: NativeInstructions
+note right: Translate to NativeInstructions from ILInstructions
+ExecutableGenerator --> Executable: NativeInstructions
+ExecutableGenerator <-- Executable: Executable
+note right: Generate Executable from NativeInstructions
+ExecutableGenerator --> ExecutableRepository: Executable
+
+@enduml
