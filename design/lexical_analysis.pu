@@ -3,7 +3,6 @@ title Sequence Diagram about Lexical Analysis
 autonumber
 
 boundary Compiler
-database MessageRepository
 
 boundary LexicalAnalyzer
 entity Token
@@ -12,7 +11,6 @@ database TokenRepository
 
 box UserInterfaceContext
     participant Compiler
-    participant MessageRepository
 end box
 
 box LexicalAnalysisContext
@@ -31,14 +29,7 @@ LexicalAnalyzer <-- CodeStream: CodeStream
 note right: New CodeStream
 LexicalAnalyzer --> Token: CodeStream
 LexicalAnalyzer <-- Token: Tokens
-group success
-Token --> MessageRepository: Success Lexical Analysis
-end
 note right: Try to Generate Tokens from CodeStream
-critical Failed to Analyze
-Token --> LexicalAnalyzer: LexicalError
-LexicalAnalyzer --> MessageRepository: LexicalError
-end
 LexicalAnalyzer --> TokenRepository: Tokens
 
 @enduml

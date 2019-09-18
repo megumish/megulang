@@ -1,16 +1,10 @@
 @startuml
-title Sequence Diagram about Compile to Intermediate Language
+title Sequence Diagram about Compilation to Intermediate Language
 autonumber
-
-database MessageRepository
 
 boundary ILCompiler
 entity ILInstruction
 database ILInstructionRepository
-
-box UserInterfaceContext
-    participant MessageRepository
-end box
 
 box ILCompilationContext
     participant ILCompiler
@@ -18,7 +12,7 @@ box ILCompilationContext
     participant ILInstructionRepository
 end box
 
-== Compile to Intermediate Language ==
+== Compilation to Intermediate Language ==
 --> ILCompiler : ValidFunctions
 ILCompiler --> ILInstruction: ValidFunctions
 ILCompiler <-- ILInstruction: ILInstructions
